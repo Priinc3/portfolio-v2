@@ -4,11 +4,12 @@
 - **Purpose**: Personal portfolio for Priince Gondaliya, AI Automation Developer.
 - **Stack**: HTML5, CSS3 (Vanilla), JavaScript (Vanilla).
 - **Status**: Production
-- **Version**: 1.0.1
+- **Version**: 1.1.0
 - **Last Updated**: 2025-05-14
 
 ## File Structure
 - `index.html`: Main entry point and only page (renamed from portfolio.html for Vercel compatibility).
+- `erp.html`: Detailed case study for the ERPNext project with screenshots.
 - `AI_CONTEXT.md`: This file.
 - `CHANGELOG.md`: Project history.
 

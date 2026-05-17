@@ -9,6 +9,14 @@ Format: [YYYY-MM-DD] | [vX.X.X] | [Type: Added/Fixed/Changed/Removed]
 
 ---
 
+## [1.1.0] — 2025-05-14
+
+### Added
+- **ERP Detail Page**: Created `erp.html` with a comprehensive case study, technical highlights, and high-resolution screenshots of the ERPNext deployment.
+- **Project Navigation**: Linked the ERP project card on the main page to the new detailed case study.
+
+---
+
 ## [1.0.1] — 2025-05-14
 
 ### Fixed
