@@ -9,6 +9,15 @@ Format: [YYYY-MM-DD] | [vX.X.X] | [Type: Added/Fixed/Changed/Removed]
 
 ---
 
+## [1.3.0] — 2025-05-14
+
+### Added
+- **SIH Experience Section**: Added a dedicated "Hackathon Experience" section highlighting the Smart India Hackathon 2025 Finalist milestone.
+- **Image Gallery**: Integrated 5 high-resolution photos from the SIH grand finale with a smooth modal popup for viewing.
+- **Team Recognition**: Included the full team "BUGBUSTERS_PB" and project context (Ministry of Ayush).
+
+---
+
 ## [1.2.0] — 2025-05-14
 
 ### Added

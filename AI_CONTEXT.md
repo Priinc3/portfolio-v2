@@ -4,7 +4,7 @@
 - **Purpose**: Personal portfolio for Priince Gondaliya, AI Automation Developer.
 - **Stack**: HTML5, CSS3 (Vanilla), JavaScript (Vanilla).
 - **Status**: Production
-- **Version**: 1.2.0
+- **Version**: 1.3.0
 - **Last Updated**: 2025-05-14
 
 ## File Structure
@@ -12,6 +12,8 @@
 - `erp.html`: Detailed case study for the ERPNext project with screenshots.
 - `AI_CONTEXT.md`: This file.
 - `CHANGELOG.md`: Project history.
+- `SIH/`: Directory containing Smart India Hackathon photos.
+- `ERP/`: Directory containing ERP project screenshots.
 
 ## Key Components
 | Component | Purpose |
@@ -19,7 +21,8 @@
 | Hero | Introduction with SIH badge and status. |
 | About | Biography and key stats. |
 | Experience | Career timeline. |
-| Projects | Grid of projects with tech stacks. |
+| Projects | Grid of projects with tech stacks and live links. |
+| SIH Gallery | (New) National Stage hackathon experience showcase. |
 | Skills | Categorized technical skills. |
 | Contact | Call to action and social links. |
 

@@ -936,6 +936,116 @@
       transition-delay: 0.3s;
     }
 
+    /* Modal */
+    .modal {
+      position: fixed;
+      inset: 0;
+      z-index: 1000;
+      background: rgba(0, 0, 0, 0.95);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 2rem;
+      cursor: pointer;
+      backdrop-filter: blur(10px);
+    }
+
+    .modal.active {
+      display: flex;
+    }
+
+    .modal img {
+      max-width: 90%;
+      max-height: 90vh;
+      border-radius: 4px;
+      box-shadow: 0 0 50px rgba(0, 0, 0, 0.5);
+    }
+
+    .close-modal {
+      position: absolute;
+      top: 2rem;
+      right: 2rem;
+      color: #fff;
+      font-size: 2rem;
+      font-family: var(--font-mono);
+    }
+
+    /* SIH Gallery */
+    #sih {
+      background: var(--surface);
+    }
+
+    .sih-grid {
+      display: grid;
+      grid-template-columns: 1.5fr 1fr;
+      gap: 4rem;
+      align-items: start;
+    }
+
+    .sih-content h2 {
+      font-size: clamp(2rem, 4vw, 3.2rem);
+      font-weight: 700;
+      line-height: 1.1;
+      margin-bottom: 1.5rem;
+    }
+
+    .sih-content h2 span {
+      color: var(--red);
+      font-family: var(--font-serif);
+      font-style: italic;
+      font-weight: 400;
+    }
+
+    .sih-content p {
+      font-size: 1rem;
+      line-height: 1.8;
+      color: var(--muted2);
+      margin-bottom: 2rem;
+    }
+
+    .sih-team {
+      font-family: var(--font-mono);
+      font-size: 0.75rem;
+      color: var(--muted);
+      margin-top: 2rem;
+      padding-top: 2rem;
+      border-top: 0.5px solid var(--border);
+    }
+
+    .sih-team strong {
+      color: var(--red);
+    }
+
+    .sih-photos {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 1rem;
+    }
+
+    .sih-photo {
+      aspect-ratio: 4/3;
+      overflow: hidden;
+      border: 0.5px solid var(--border);
+      cursor: pointer;
+      position: relative;
+    }
+
+    .sih-photo img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.5s ease;
+    }
+
+    .sih-photo:hover img {
+      transform: scale(1.05);
+    }
+
+    .sih-photo:first-child {
+      grid-column: span 2;
+      aspect-ratio: 16/9;
+    }
+
     /* Mobile */
     @media (max-width: 768px) {
       nav {
@@ -1409,10 +1519,49 @@
     </div>
   </section>
 
+  <div class="modal" id="imageModal">
+    <span class="close-modal">×</span>
+    <img src="" alt="Zoomed view">
+  </div>
+
+  <!-- SIH Gallery -->
+  <section id="sih">
+    <div class="section-label">06 — Hackathon Experience</div>
+    <div class="sih-grid">
+      <div class="sih-content reveal">
+        <h2>SIH Finalist 2025 | My First <span>National Stage</span></h2>
+        <p>Stepping onto a national platform for the first time, the scale, intensity, and expectations were unlike anything I had experienced before. The non-stop coding, working on AI-driven automation, facing critical evaluations from industry experts, and the pressure of the Grand Finale taught me lessons no classroom or textbook ever could.</p>
+        <p>We tackled a problem statement from the <strong>Ministry of Ayush (PSID 25026)</strong>, developing API infrastructure to integrate NAMASTE and ICD-11 Traditional Medicine modules into EMR systems compliant with India’s EHR standards.</p>
+        <p>We may not have returned with a trophy, but we returned with clarity, experience, and a deeper understanding of what it takes to build solutions that stand strong under real pressure.</p>
+
+        <div class="sih-team">
+          Team <strong>BUGBUSTERS_PB</strong>:<br>
+          Poojan Bhuva · Raj Vasoya · Priyanshi Naghera · Yesha Jagad · Om Vinchhi
+        </div>
+      </div>
+      <div class="sih-photos reveal reveal-delay-2">
+        <div class="sih-photo" onclick="openModal(this.querySelector('img').src)">
+          <img src="SIH/IMG_1935.jpeg" alt="SIH Team Photo">
+        </div>
+        <div class="sih-photo" onclick="openModal(this.querySelector('img').src)">
+          <img src="SIH/IMG_1902.jpeg" alt="SIH Coding Session">
+        </div>
+        <div class="sih-photo" onclick="openModal(this.querySelector('img').src)">
+          <img src="SIH/IMG_1905.jpeg" alt="SIH Evaluation">
+        </div>
+        <div class="sih-photo" onclick="openModal(this.querySelector('img').src)">
+          <img src="SIH/IMG_1906.jpeg" alt="SIH Presentation">
+        </div>
+        <div class="sih-photo" onclick="openModal(this.querySelector('img').src)">
+          <img src="SIH/IMG_1954.jpeg" alt="SIH Venue">
+        </div>
+      </div>
+    </div>
+  </section>
+
   <!-- Contact -->
   <section id="contact">
-    <div class="section-label" style="justify-content:center">06 — Contact</div>
-    <h2 class="contact-heading reveal">Let's build<br><span>something real.</span></h2>
+    <div class="section-label" style="justify-content:center">07 — Contact</div>    <h2 class="contact-heading reveal">Let's build<br><span>something real.</span></h2>
     <p class="contact-sub reveal reveal-delay-1">Available for freelance, full-time, and collabs</p>
     <div class="contact-links reveal reveal-delay-2">
       <a href="mailto:gondaliyaprince668@gmail.com" class="contact-link primary">✉ gondaliyaprince668@gmail.com</a>
@@ -1447,6 +1596,20 @@
       requestAnimationFrame(animCursor);
     }
     animCursor();
+
+    const modal = document.getElementById('imageModal');
+    const modalImg = modal.querySelector('img');
+
+    function openModal(src) {
+      modalImg.src = src;
+      modal.classList.add('active');
+      document.body.style.overflow = 'hidden';
+    }
+
+    modal.onclick = function () {
+      modal.classList.remove('active');
+      document.body.style.overflow = 'auto';
+    };
 
     // Scroll reveal
     const reveals = document.querySelectorAll('.reveal');
