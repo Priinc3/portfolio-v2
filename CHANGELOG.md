@@ -9,6 +9,13 @@ Format: [YYYY-MM-DD] | [vX.X.X] | [Type: Added/Fixed/Changed/Removed]
 
 ---
 
+## [1.4.0] — 2025-05-14
+
+### Added
+- **Project Status Badges**: Added visual indicators for all projects (In Progress, Finished, Draft) to provide clarity on the current state of each work.
+
+---
+
 ## [1.3.0] — 2025-05-14
 
 ### Added

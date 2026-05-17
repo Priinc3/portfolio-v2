@@ -587,6 +587,36 @@
       letter-spacing: 0.1em;
     }
 
+    .project-status {
+      position: absolute;
+      top: 3.5rem;
+      right: 1.5rem;
+      font-family: var(--font-mono);
+      font-size: 0.55rem;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      padding: 0.2rem 0.5rem;
+      border-radius: 2px;
+    }
+
+    .status-progress {
+      color: #3b82f6;
+      background: rgba(59, 130, 246, 0.1);
+      border: 0.5px solid rgba(59, 130, 246, 0.2);
+    }
+
+    .status-finished {
+      color: #22c55e;
+      background: rgba(34, 197, 94, 0.1);
+      border: 0.5px solid rgba(34, 197, 94, 0.2);
+    }
+
+    .status-draft {
+      color: var(--muted2);
+      background: rgba(153, 153, 153, 0.1);
+      border: 0.5px solid rgba(153, 153, 153, 0.2);
+    }
+
     /* Skills */
     #skills {
       background: var(--black);
@@ -1257,6 +1287,7 @@
 
       <div class="project-card reveal">
         <div class="project-num">01</div>
+        <div class="project-status status-progress">In Progress</div>
         <div class="project-tag">Computer Vision · AI</div>
         <div class="project-name">AI CCTV Surveillance &amp; Threat Detection</div>
         <div class="project-desc">Real-time detection of people, vehicles, and threats (knife/gun/accidents) using
@@ -1272,6 +1303,7 @@
 
       <div class="project-card reveal reveal-delay-1">
         <div class="project-num">02</div>
+        <div class="project-status status-progress">In Progress</div>
         <div class="project-tag">Deep Learning · IoT</div>
         <div class="project-name">Traffic Optimiser — Smart Signal Control</div>
         <div class="project-desc">Reduced average vehicle wait time by ~42% using a Weighted Density Algorithm driven by
@@ -1287,6 +1319,7 @@
 
       <div class="project-card reveal reveal-delay-2">
         <div class="project-num">03</div>
+        <div class="project-status status-finished">Finished</div>
         <div class="project-tag">Full Stack · POS</div>
         <div class="project-name">SwadPOS — Hybrid Restaurant Management</div>
         <div class="project-desc">A robust Point of Sale system built for modern restaurants. Features a unique hybrid
@@ -1307,6 +1340,7 @@
 
       <div class="project-card reveal">
         <div class="project-num">04</div>
+        <div class="project-status status-finished">Finished</div>
         <div class="project-tag">SaaS · GenAI</div>
         <div class="project-name">Imagera — AI Product Photography SaaS</div>
         <div class="project-desc">Auto-generates studio-quality product visuals using Veo 3 + Gemini — cuts photography
@@ -1328,6 +1362,7 @@
       <a href="erp.html" style="text-decoration: none; color: inherit; display: block;">
         <div class="project-card reveal reveal-delay-1">
           <div class="project-num">05</div>
+          <div class="project-status status-finished">Finished</div>
           <div class="project-tag">ERP · Automation</div>
           <div class="project-name">ERPNext ERP Deployment &amp; Custom Dashboard</div>
           <div class="project-desc">Deployed full ERP from scratch (item masters, BOMs, warehouses, roles) and built a
@@ -1345,6 +1380,7 @@
 
       <div class="project-card reveal reveal-delay-2">
         <div class="project-num">06</div>
+        <div class="project-status status-finished">Finished</div>
         <div class="project-tag">n8n · AI · Finance</div>
         <div class="project-name">AI Invoice Processing &amp; Approval Automation</div>
         <div class="project-desc">Ingests PDF invoices → AI extracts vendor/amount/line items → role-based approval
@@ -1359,6 +1395,7 @@
 
       <div class="project-card reveal">
         <div class="project-num">07</div>
+        <div class="project-status status-finished">Finished</div>
         <div class="project-tag">Analytics · Multi-Platform</div>
         <div class="project-name">Ads &amp; Sales Analysis Automation Dashboard</div>
         <div class="project-desc">Unified analytics platform aggregating data from 5+ marketplaces (Shopify, Amazon,
@@ -1374,6 +1411,7 @@
 
       <div class="project-card reveal reveal-delay-1">
         <div class="project-num">08</div>
+        <div class="project-status status-finished">Finished</div>
         <div class="project-tag">GenAI · Automation</div>
         <div class="project-name">Personalised Image Generation Automation</div>
         <div class="project-desc">Prompt-based image generation pipeline that takes user/product inputs and
@@ -1388,6 +1426,7 @@
 
       <div class="project-card reveal reveal-delay-2">
         <div class="project-num">09</div>
+        <div class="project-status status-finished">Finished</div>
         <div class="project-tag">NLP · Content</div>
         <div class="project-name">Trending Hashtag Analysis Platform</div>
         <div class="project-desc">Automated hashtag discovery, ranking, and category-based insight generation for content
@@ -1401,6 +1440,7 @@
 
       <div class="project-card reveal">
         <div class="project-num">10</div>
+        <div class="project-status status-draft">Draft Side Project</div>
         <div class="project-tag">Deep Learning · CNN</div>
         <div class="project-name">Face Recognition System</div>
         <div class="project-desc">Built and trained a CNN model for face identification and classification using
