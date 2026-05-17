@@ -9,6 +9,13 @@ Format: [YYYY-MM-DD] | [vX.X.X] | [Type: Added/Fixed/Changed/Removed]
 
 ---
 
+## [1.0.1] — 2025-05-14
+
+### Fixed
+- **404 Error**: Renamed `portfolio.html` to `index.html` to ensure Vercel serves the page correctly as the entry point.
+
+---
+
 ## [1.0.0] — 2025-05-14
 
 ### Added

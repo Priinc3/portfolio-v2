@@ -4,11 +4,11 @@
 - **Purpose**: Personal portfolio for Priince Gondaliya, AI Automation Developer.
 - **Stack**: HTML5, CSS3 (Vanilla), JavaScript (Vanilla).
 - **Status**: Production
-- **Version**: 1.0.0
+- **Version**: 1.0.1
 - **Last Updated**: 2025-05-14
 
 ## File Structure
-- `portfolio.html`: Main entry point and only page.
+- `index.html`: Main entry point and only page (renamed from portfolio.html for Vercel compatibility).
 - `AI_CONTEXT.md`: This file.
 - `CHANGELOG.md`: Project history.
 
