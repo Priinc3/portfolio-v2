@@ -9,6 +9,14 @@ Format: [YYYY-MM-DD] | [vX.X.X] | [Type: Added/Fixed/Changed/Removed]
 
 ---
 
+## [1.0.0] — 2025-05-14
+
+### Added
+- **GitHub Repository**: Initialized and pushed to [Priinc3/portfolio-v2](https://github.com/Priinc3/portfolio-v2).
+- **Vercel Deployment**: Deployed live at [portfolio-v2-blue-seven-12.vercel.app](https://portfolio-v2-blue-seven-12.vercel.app).
+
+---
+
 ## [0.2.1] — 2025-05-14
 
 ### Changed
