@@ -4,7 +4,7 @@
 - **Purpose**: Personal portfolio for Priince Gondaliya, AI Automation Developer.
 - **Stack**: HTML5, CSS3 (Vanilla), JavaScript (Vanilla).
 - **Status**: Production
-- **Version**: 1.3.0
+- **Version**: 1.3.1
 - **Last Updated**: 2025-05-14
 
 ## File Structure
