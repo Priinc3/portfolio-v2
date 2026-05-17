@@ -494,27 +494,30 @@
 
     .projects-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
-      gap: 1px;
-      background: var(--border);
-      border: 0.5px solid var(--border);
+      grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+      gap: 2rem;
+      background: transparent;
+      border: none;
       grid-auto-rows: 1fr;
     }
 
     .project-card {
       background: var(--surface2);
-      padding: 2rem;
+      padding: 2.5rem;
       position: relative;
       overflow: hidden;
       cursor: none;
-      transition: background 0.3s;
+      transition: all 0.3s ease;
       height: 100%;
       display: flex;
       flex-direction: column;
+      border: 1px solid var(--border);
     }
 
     .project-card:hover {
       background: var(--surface3);
+      border-color: var(--border-red);
+      transform: translateY(-4px);
     }
 
     .project-card::after {
@@ -537,65 +540,69 @@
     .project-tag {
       display: inline-flex;
       font-family: var(--font-mono);
-      font-size: 0.65rem;
+      font-size: 0.6rem;
       color: var(--red);
       border: 0.5px solid var(--border-red);
-      padding: 0.25rem 0.6rem;
-      letter-spacing: 0.08em;
+      padding: 0.2rem 0.6rem;
+      letter-spacing: 0.1em;
       text-transform: uppercase;
-      margin-bottom: 1rem;
+      margin-bottom: 1.5rem;
+      width: fit-content;
     }
 
     .project-name {
-      font-size: 1.05rem;
+      font-size: 1.2rem;
       font-weight: 700;
-      margin-bottom: 0.6rem;
+      margin-bottom: 1rem;
       line-height: 1.3;
+      color: var(--text);
     }
 
     .project-desc {
-      font-size: 0.85rem;
+      font-size: 0.88rem;
       color: var(--muted2);
       line-height: 1.7;
-      margin-bottom: 1.2rem;
+      margin-bottom: 2rem;
     }
 
     .project-stack {
       display: flex;
       flex-wrap: wrap;
-      gap: 0.4rem;
+      gap: 0.5rem;
       margin-top: auto;
+      padding-top: 1.5rem;
     }
 
     .stack-pill {
       font-family: var(--font-mono);
-      font-size: 0.62rem;
+      font-size: 0.6rem;
       color: var(--muted);
-      background: rgba(255, 255, 255, 0.04);
+      background: rgba(255, 255, 255, 0.03);
       border: 0.5px solid var(--border);
-      padding: 0.2rem 0.5rem;
+      padding: 0.25rem 0.6rem;
       letter-spacing: 0.05em;
     }
 
     .project-num {
       position: absolute;
-      top: 1.5rem;
-      right: 1.5rem;
+      top: 2.5rem;
+      right: 2.5rem;
       font-family: var(--font-mono);
       font-size: 0.65rem;
       color: var(--muted);
       letter-spacing: 0.1em;
+      opacity: 0.5;
     }
 
     .project-status {
       position: absolute;
-      top: 3.5rem;
-      right: 1.5rem;
+      top: 4.2rem;
+      right: 2.5rem;
       font-family: var(--font-mono);
-      font-size: 0.55rem;
+      font-size: 0.5rem;
       text-transform: uppercase;
-      letter-spacing: 0.05em;
-      padding: 0.2rem 0.5rem;
+      letter-spacing: 0.08em;
+      padding: 0.15rem 0.4rem;
       border-radius: 2px;
     }
 
