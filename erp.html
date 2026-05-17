@@ -60,12 +60,29 @@
   .stack-item { padding: 0.5rem 1rem; background: var(--surface2); border: 0.5px solid var(--border); font-family: var(--font-mono); font-size: 0.75rem; color: var(--muted2); }
 
   .screenshot-gallery { display: flex; flex-direction: column; gap: 2rem; }
-  .screenshot-item { background: var(--surface2); border: 0.5px solid var(--border); overflow: hidden; position: relative; border-radius: 8px; }
+  .screenshot-item { background: var(--surface2); border: 0.5px solid var(--border); overflow: hidden; position: relative; border-radius: 8px; cursor: pointer; }
   .screenshot-item img { width: 100%; height: auto; display: block; transition: transform 0.5s ease; }
   .screenshot-item:hover img { transform: scale(1.02); }
 
-  .highlights { background: var(--surface); padding: 4rem 3rem; border: 0.5px solid var(--border); }
+  /* Modal */
+  .modal {
+    position: fixed; inset: 0; z-index: 1000;
+    background: rgba(0,0,0,0.95);
+    display: none; align-items: center; justify-content: center;
+    padding: 2rem; cursor: pointer;
+    backdrop-filter: blur(10px);
+  }
+  .modal.active { display: flex; }
+  .modal img { max-width: 90%; max-height: 90vh; border-radius: 4px; box-shadow: 0 0 50px rgba(0,0,0,0.5); }
+  .close-modal { position: absolute; top: 2rem; right: 2rem; color: #fff; font-size: 2rem; font-family: var(--font-mono); }
+
+  .highlights { background: var(--surface); padding: 4rem 3rem; border: 0.5px solid var(--border); margin-bottom: 3rem; }
   .highlights h3 { font-family: var(--font-mono); font-size: 0.8rem; color: var(--red); text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 2rem; }
+  
+  .human-challenge { border-left: 2px solid var(--red); padding: 2rem; background: rgba(225,6,0,0.03); margin-top: 3rem; }
+  .human-challenge h4 { font-family: var(--font-mono); font-size: 0.75rem; color: var(--red); text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 1rem; }
+  .human-challenge p { font-size: 1rem !important; margin-bottom: 0 !important; font-style: italic; }
+
   .highlight-list { list-style: none; }
   .highlight-list li { font-size: 1rem; color: var(--muted2); margin-bottom: 1rem; padding-left: 1.5rem; position: relative; }
   .highlight-list li::before { content: '✦'; position: absolute; left: 0; color: var(--red); }
@@ -82,6 +99,11 @@
 </head>
 <body>
 
+<div class="modal" id="imageModal">
+  <span class="close-modal">×</span>
+  <img src="" alt="Zoomed view">
+</div>
+
 <nav>
   <a href="index.html" class="nav-logo">PG.DEV</a>
   <a href="index.html" class="back-link">← Back to Portfolio</a>
@@ -96,13 +118,18 @@
   <div class="project-grid">
     <div class="project-info">
       <h3>Overview</h3>
-      <p>This project involved the end-to-end deployment of a full ERP system for a manufacturing and retail business. The goal was to unify fragmented operations into a single source of truth, automating critical workflows that were previously managed manually.</p>
+      <p>This project involved the end-to-end deployment of a full ERP system for Joyspoon, a manufacturing unit. The goal was to unify fragmented operations into a single source of truth, automating critical workflows that were previously managed manually.</p>
       
-      <h3>Key Challenges</h3>
-      <p>The primary challenge was data migration and role-based access control for a multi-departmental team. I architected a system that handles item masters, Bills of Materials (BOMs), warehouse transfers, and production orders with 100% data integrity.</p>
+      <h3>The Human Challenge</h3>
+      <p>The hardest problem wasn't just technical — it was the human element. The workers at the Joyspoon manufacturing unit were not tech-savvy. ERPNext, being open-source and highly comprehensive, had hundreds of features and complex UI elements that the team simply didn't need and found overwhelming.</p>
 
-      <div class="highlights">
-        <h3>Project Highlights</h3>
+      <div class="human-challenge">
+        <h4>The Solution</h4>
+        <p>"I solved this by abstracting the complexity. I built a simplified interface that brought only the necessary actions into one place, organized strictly by the natural flow of the manufacturing process. This made the system intuitive even for those with zero technical background."</p>
+      </div>
+
+      <div class="highlights" style="margin-top: 3rem;">
+        <h3>Technical Highlights</h3>
         <ul class="highlight-list">
           <li>Cut operational coordination time by ~60% through automated reporting.</li>
           <li>Automated Stock Entry and Work Order flows across 6+ ERP modules.</li>
@@ -122,13 +149,13 @@
     </div>
 
     <div class="screenshot-gallery">
-      <div class="screenshot-item">
+      <div class="screenshot-item" onclick="openModal(this.querySelector('img').src)">
         <img src="ERP/Screenshot 2026-05-17 at 2.27.26 PM.png" alt="ERP Dashboard 1">
       </div>
-      <div class="screenshot-item">
+      <div class="screenshot-item" onclick="openModal(this.querySelector('img').src)">
         <img src="ERP/Screenshot 2026-05-17 at 2.27.52 PM.png" alt="ERP Dashboard 2">
       </div>
-      <div class="screenshot-item">
+      <div class="screenshot-item" onclick="openModal(this.querySelector('img').src)">
         <img src="ERP/Screenshot 2026-05-17 at 2.28.12 PM.png" alt="ERP Dashboard 3">
       </div>
     </div>
@@ -139,6 +166,22 @@
   <p>© 2025 Priince Gondaliya</p>
   <p>Ahmedabad, India</p>
 </footer>
+
+<script>
+  const modal = document.getElementById('imageModal');
+  const modalImg = modal.querySelector('img');
+  
+  function openModal(src) {
+    modalImg.src = src;
+    modal.classList.add('active');
+    document.body.style.overflow = 'hidden';
+  }
+
+  modal.onclick = function() {
+    modal.classList.remove('active');
+    document.body.style.overflow = 'auto';
+  };
+</script>
 
 </body>
 </html>
