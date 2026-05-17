@@ -498,6 +498,7 @@
       gap: 1px;
       background: var(--border);
       border: 0.5px solid var(--border);
+      grid-auto-rows: 1fr;
     }
 
     .project-card {
@@ -507,6 +508,9 @@
       overflow: hidden;
       cursor: none;
       transition: background 0.3s;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
     }
 
     .project-card:hover {
@@ -560,6 +564,7 @@
       display: flex;
       flex-wrap: wrap;
       gap: 0.4rem;
+      margin-top: auto;
     }
 
     .stack-pill {
@@ -1141,6 +1146,26 @@
 
       <div class="project-card reveal">
         <div class="project-num">01</div>
+        <div class="project-tag">Full Stack · POS</div>
+        <div class="project-name">SwadPOS — Hybrid Restaurant Management</div>
+        <div class="project-desc">A robust Point of Sale system built for modern restaurants. Features a unique hybrid
+          architecture that operates fully offline and auto-syncs data once connectivity is restored. Optimized for
+          speed and currently serving 2 active restaurant locations. Live at <a href="https://swadpos.in"
+            target="_blank" style="color:var(--red); text-decoration:none;">swadpos.in</a>.</div>
+        <div class="project-stack">
+          <span class="stack-pill">React</span>
+          <span class="stack-pill">FastAPI</span>
+          <span class="stack-pill">IndexedDB</span>
+          <span class="stack-pill">PostgreSQL</span>
+          <a href="https://swadpos.in" target="_blank" style="text-decoration: none; margin-left: auto;">
+            <span class="stack-item" style="font-family: var(--font-mono); font-size: 0.62rem; color: var(--red);">Visit Site
+              ↗</span>
+          </a>
+        </div>
+      </div>
+
+      <div class="project-card reveal reveal-delay-1">
+        <div class="project-num">02</div>
         <div class="project-tag">Computer Vision · AI</div>
         <div class="project-name">AI CCTV Surveillance &amp; Threat Detection</div>
         <div class="project-desc">Real-time detection of people, vehicles, and threats (knife/gun/accidents) using
@@ -1154,8 +1179,8 @@
         </div>
       </div>
 
-      <div class="project-card reveal reveal-delay-1">
-        <div class="project-num">02</div>
+      <div class="project-card reveal reveal-delay-2">
+        <div class="project-num">03</div>
         <div class="project-tag">Deep Learning · IoT</div>
         <div class="project-name">Traffic Optimiser — Smart Signal Control</div>
         <div class="project-desc">Reduced average vehicle wait time by ~42% using a Weighted Density Algorithm driven by
@@ -1169,27 +1194,29 @@
         </div>
       </div>
 
-      <div class="project-card reveal reveal-delay-2">
-        <div class="project-num">03</div>
+      <div class="project-card reveal">
+        <div class="project-num">04</div>
         <div class="project-tag">SaaS · GenAI</div>
         <div class="project-name">Imagera — AI Product Photography SaaS</div>
         <div class="project-desc">Auto-generates studio-quality product visuals using Veo 3 + Gemini — cuts photography
           costs by ~80% vs traditional shoots. Automated video ad generation via Remotion with beat-synced 7-scene
-          storyboarding. Live at <a href="https://imagera.in" target="_blank" style="color:var(--red); text-decoration:none;">imagera.in</a>.</div>
+          storyboarding. Live at <a href="https://imagera.in" target="_blank"
+            style="color:var(--red); text-decoration:none;">imagera.in</a>.</div>
         <div class="project-stack">
           <span class="stack-pill">Veo 3</span>
           <span class="stack-pill">Gemini</span>
           <span class="stack-pill">Remotion</span>
           <span class="stack-pill">React</span>
           <a href="https://imagera.in" target="_blank" style="text-decoration: none; margin-left: auto;">
-            <span class="stack-item" style="font-family: var(--font-mono); font-size: 0.62rem; color: var(--red);">Visit Site ↗</span>
+            <span class="stack-item" style="font-family: var(--font-mono); font-size: 0.62rem; color: var(--red);">Visit Site
+              ↗</span>
           </a>
         </div>
       </div>
 
-      <a href="erp.html" style="text-decoration: none; color: inherit;">
-        <div class="project-card reveal">
-          <div class="project-num">04</div>
+      <a href="erp.html" style="text-decoration: none; color: inherit; display: block;">
+        <div class="project-card reveal reveal-delay-1">
+          <div class="project-num">05</div>
           <div class="project-tag">ERP · Automation</div>
           <div class="project-name">ERPNext ERP Deployment &amp; Custom Dashboard</div>
           <div class="project-desc">Deployed full ERP from scratch (item masters, BOMs, warehouses, roles) and built a
@@ -1198,13 +1225,15 @@
           <div class="project-stack">
             <span class="stack-pill">ERPNext</span>
             <span class="stack-pill">Python</span>
-            <span class="stack-item" style="font-family: var(--font-mono); font-size: 0.62rem; color: var(--red); margin-left: auto;">View Case Study →</span>
+            <span class="stack-item"
+              style="font-family: var(--font-mono); font-size: 0.62rem; color: var(--red); margin-left: auto;">View Case Study
+              →</span>
           </div>
         </div>
       </a>
 
-      <div class="project-card reveal reveal-delay-1">
-        <div class="project-num">05</div>
+      <div class="project-card reveal reveal-delay-2">
+        <div class="project-num">06</div>
         <div class="project-tag">n8n · AI · Finance</div>
         <div class="project-name">AI Invoice Processing &amp; Approval Automation</div>
         <div class="project-desc">Ingests PDF invoices → AI extracts vendor/amount/line items → role-based approval
@@ -1217,8 +1246,8 @@
         </div>
       </div>
 
-      <div class="project-card reveal reveal-delay-2">
-        <div class="project-num">06</div>
+      <div class="project-card reveal">
+        <div class="project-num">07</div>
         <div class="project-tag">Analytics · Multi-Platform</div>
         <div class="project-name">Ads &amp; Sales Analysis Automation Dashboard</div>
         <div class="project-desc">Unified analytics platform aggregating data from 5+ marketplaces (Shopify, Amazon,
@@ -1232,8 +1261,8 @@
         </div>
       </div>
 
-      <div class="project-card reveal">
-        <div class="project-num">07</div>
+      <div class="project-card reveal reveal-delay-1">
+        <div class="project-num">08</div>
         <div class="project-tag">GenAI · Automation</div>
         <div class="project-name">Personalised Image Generation Automation</div>
         <div class="project-desc">Prompt-based image generation pipeline that takes user/product inputs and
@@ -1246,13 +1275,12 @@
         </div>
       </div>
 
-      <div class="project-card reveal reveal-delay-1">
-        <div class="project-num">08</div>
+      <div class="project-card reveal reveal-delay-2">
+        <div class="project-num">09</div>
         <div class="project-tag">NLP · Content</div>
         <div class="project-name">Trending Hashtag Analysis Platform</div>
-        <div class="project-desc">Automated hashtag discovery, ranking, and category-based insight generation for
-          content and marketing teams. Generated summary reports to cut time spent on manual social media research.
-        </div>
+        <div class="project-desc">Automated hashtag discovery, ranking, and category-based insight generation for content
+          and marketing teams. Generated summary reports to cut time spent on manual social media research.</div>
         <div class="project-stack">
           <span class="stack-pill">Python</span>
           <span class="stack-pill">NLP</span>
@@ -1260,8 +1288,8 @@
         </div>
       </div>
 
-      <div class="project-card reveal reveal-delay-2">
-        <div class="project-num">09</div>
+      <div class="project-card reveal">
+        <div class="project-num">10</div>
         <div class="project-tag">Deep Learning · CNN</div>
         <div class="project-name">Face Recognition System</div>
         <div class="project-desc">Built and trained a CNN model for face identification and classification using

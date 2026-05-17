@@ -9,6 +9,18 @@ Format: [YYYY-MM-DD] | [vX.X.X] | [Type: Added/Fixed/Changed/Removed]
 
 ---
 
+## [1.2.0] — 2025-05-14
+
+### Added
+- **SwadPOS Project**: Added the SwadPOS hybrid restaurant management system as the flagship project.
+- **Project Navigation**: Integrated live visit links for SwadPOS and Imagera.
+
+### Fixed
+- **Grid Layout**: Fixed a spacing bug in the projects grid caused by the ERP link wrapper.
+- **Card Alignment**: Standardized card heights and alignment for a cleaner, professional look.
+
+---
+
 ## [1.1.0] — 2025-05-14
 
 ### Added
