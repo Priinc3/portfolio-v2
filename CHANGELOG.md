@@ -9,6 +9,14 @@ Format: [YYYY-MM-DD] | [vX.X.X] | [Type: Added/Fixed/Changed/Removed]
 
 ---
 
+## [1.5.0] — 2025-05-14
+
+### Changed
+- **Projects UI Refinement**: Significant decluttering of the projects grid. Increased card spacing (from 1px to 2rem), added internal padding, and refined badge positioning for a more breathable, professional layout.
+- **Card Styling**: Added subtle borders and a hover "lift" effect to improve interactive feedback and project separation.
+
+---
+
 ## [1.4.0] — 2025-05-14
 
 ### Added
