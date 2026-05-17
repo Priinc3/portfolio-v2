@@ -9,6 +9,15 @@ Format: [YYYY-MM-DD] | [vX.X.X] | [Type: Added/Fixed/Changed/Removed]
 
 ---
 
+## [1.6.0] — 2025-05-14
+
+### Changed
+- **Mobile UI Optimization**: Improved button layouts, stats cards, and spacing for small screens.
+- **Hero Section**: Removed the SIH badge from the hero section as per user feedback.
+- **Project Structure**: Consolidated mobile responsiveness for grid layouts.
+
+---
+
 ## [1.5.0] — 2025-05-14
 
 ### Changed
