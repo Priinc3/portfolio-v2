@@ -1789,11 +1789,6 @@
             rig.position.set(3, 0, 0);
             scene.add(rig);
             const YAW_FIX = 0; // nose +Z, rig yaw = atan2(dx, dz) faces travel direction
-            const glow = new THREE.Mesh(
-              new THREE.CircleGeometry(0.7, 24),
-              new THREE.MeshBasicMaterial({ color: 0xE10600, transparent: true, opacity: 0.18, blending: THREE.AdditiveBlending, depthWrite: false })
-            );
-            glow.rotation.x = -Math.PI / 2; glow.position.y = 0.02; scene.add(glow);
 
             const card = document.getElementById('photoCard');
             const hero = document.getElementById('hero');
@@ -1803,12 +1798,11 @@
             const clock = new THREE.Clock();
             const wrap = (a) => ((a + Math.PI * 3) % (Math.PI * 2)) - Math.PI;
 
-            // Rounded-rectangle circuit around a screen rect: straights +
-            // quarter-circle corners, driven clockwise (right turns) at constant speed.
+            // Edge rail: the photo's own border (inset ~6px for the card's 3D tilt).
             const heroTrack = (s, r) => {
               const cx = r.left + r.width / 2, cy = r.top + r.height / 2;
-              const hw = r.width / 2 + 90, hh = r.height / 2 + 80;
-              const cr = Math.max(20, Math.min(70, hw * 0.4, hh * 0.4));
+              const hw = r.width / 2 - 6, hh = r.height / 2 - 6;
+              const cr = Math.max(12, Math.min(26, hw * 0.4, hh * 0.4));
               const sx = 2 * (hw - cr), sy = 2 * (hh - cr), ca = Math.PI * cr / 2;
               const P = 2 * sx + 2 * sy + 4 * ca;
               let d = ((s % P) + P) % P;
@@ -1824,11 +1818,57 @@
               const a = Math.PI + d / cr; return [X0 + cr * Math.cos(a), T + cr + cr * Math.sin(a)]; // turn right
             };
 
-            let heroS = 0, snakeP = 0;
-            const HERO_V = 300; // px/s along the circuit
-            const SNAKE_W = 0.6; // rad/s weave on the scroll road
+            let heroS = 0;
+            const HERO_V = 300; // px/s along the edge rail
             const pos = new THREE.Vector3(3, 0, 0);
             rig.position.copy(pos);
+
+            // Parking spots: empty section gutters in document coords (dynamic).
+            const parkingSecs = ['about', 'experience', 'projects', 'skills', 'education', 'sih', 'contact'];
+            let parkings = [];
+            const computeParkings = () => {
+              parkings = [];
+              parkingSecs.forEach((id, i) => {
+                const el = document.getElementById(id);
+                if (!el) return;
+                parkings.push({ x: (i % 2 ? 0.88 : 0.12) * innerWidth, docY: el.offsetTop + 120 });
+              });
+            };
+            computeParkings();
+            addEventListener('resize', computeParkings);
+            addEventListener('load', computeParkings);
+            if (document.fonts?.ready) document.fonts.ready.then(computeParkings);
+
+            // Drag: grab the car and it chases your cursor a beat behind (mouse/pen).
+            const drag = { on: false, x: 0, y: 0 };
+            const carScreen = new THREE.Vector3();
+            const carScreenPos = () => {
+              carScreen.set(pos.x, 0, pos.z).project(camera);
+              return [(carScreen.x * 0.5 + 0.5) * innerWidth, (-carScreen.y * 0.5 + 0.5) * innerHeight];
+            };
+            addEventListener('pointerdown', (e) => {
+              if (e.pointerType === 'touch' || e.button !== 0) return;
+              const [cx, cy] = carScreenPos();
+              if (Math.hypot(e.clientX - cx, e.clientY - cy) < 110) { drag.on = true; drag.x = e.clientX; drag.y = e.clientY; }
+            });
+            addEventListener('pointermove', (e) => {
+              if (!drag.on || e.pointerType === 'touch') return;
+              drag.x = e.clientX; drag.y = e.clientY;
+              e.preventDefault();
+            }, { passive: false });
+            addEventListener('pointerup', () => { drag.on = false; });
+
+            // Kinematic pursuit: turn-limited steering, full stop when parked.
+            const driveTo = (wx, wz, dt, vmax, boost) => {
+              const dx = wx - pos.x, dz = wz - pos.z;
+              if (Math.hypot(dx, dz) < 0.18) return; // parked — freeze
+              const turn = wrap(Math.atan2(dx, dz) + YAW_FIX - rig.rotation.y);
+              rig.rotation.y += Math.min(Math.abs(turn), 4 * dt) * Math.sign(turn);
+              const v = Math.min(vmax, 3 * Math.hypot(dx, dz) + boost);
+              pos.x += Math.sin(rig.rotation.y) * v * dt;
+              pos.z += Math.cos(rig.rotation.y) * v * dt;
+              rig.position.set(pos.x, 0, pos.z);
+            };
 
             addEventListener('resize', () => {
               camera.aspect = innerWidth / innerHeight;
@@ -1836,31 +1876,38 @@
               renderer.setSize(innerWidth, innerHeight);
             });
 
+            let lastSY = scrollY, scrollVel = 0;
             const tick = () => {
               requestAnimationFrame(tick);
               const dt = Math.min(clock.getDelta(), 0.05);
               const r = card?.getBoundingClientRect();
               const inHero = r?.width && hero.getBoundingClientRect().bottom > innerHeight * 0.45;
-              let spx, spy, apx, apy; // track point + point slightly ahead (screen px)
-              if (inHero) {
+              scrollVel = scrollVel * 0.9 + ((scrollY - lastSY) / Math.max(dt, 1e-3)) * 0.1;
+              lastSY = scrollY;
+
+              if (drag.on) {
+                driveTo(px2wx(drag.x), px2wz(drag.y), dt, 10, 1.5); // chase cursor, latency built in
+              } else if (inHero) {
                 heroS += HERO_V * dt;
-                [spx, spy] = heroTrack(heroS, r);
-                [apx, apy] = heroTrack(heroS + 4, r);
-              } else { // winding road: weaves through empty space, driven continuously
-                snakeP += SNAKE_W * dt;
-                const q = snakeP + 0.02;
-                spx = innerWidth / 2 + Math.sin(snakeP) * innerWidth * 0.30;
-                spy = innerHeight * 0.70 + Math.cos(snakeP * 0.63) * 60;
-                apx = innerWidth / 2 + Math.sin(q) * innerWidth * 0.30;
-                apy = innerHeight * 0.70 + Math.cos(q * 0.63) * 60;
+                const [spx, spy] = heroTrack(heroS, r);
+                const [apx, apy] = heroTrack(heroS + 4, r);
+                const wx = px2wx(spx), wz = px2wz(spy);
+                const kP = 1 - Math.exp(-8 * dt), kH = 1 - Math.exp(-10 * dt);
+                pos.x += (wx - pos.x) * kP; pos.z += (wz - pos.z) * kP;
+                rig.position.set(pos.x, 0, pos.z);
+                const yaw = Math.atan2(px2wx(apx) - wx, px2wz(apy) - wz) + YAW_FIX;
+                rig.rotation.y += wrap(yaw - rig.rotation.y) * kH; // steer along rail tangent
+              } else {
+                // scroll = throttle: destination parking tracks the page, car pursues
+                let dest = 0;
+                const line = scrollY + innerHeight * 0.55;
+                parkings.forEach((p, i) => { if (p.docY < line) dest = i; });
+                const p = parkings[Math.min(dest, parkings.length - 1)];
+                if (p) {
+                  const wx = px2wx(p.x), wz = px2wz(p.docY - scrollY);
+                  driveTo(wx, wz, dt, 8, Math.min(2.5, Math.abs(scrollVel) * 0.003));
+                }
               }
-              const wx = px2wx(spx), wz = px2wz(spy);
-              const kP = 1 - Math.exp(-8 * dt), kH = 1 - Math.exp(-10 * dt);
-              pos.x += (wx - pos.x) * kP; pos.z += (wz - pos.z) * kP;
-              rig.position.set(pos.x, 0, pos.z); // flat 2D, no tilt/bob
-              const yaw = Math.atan2(px2wx(apx) - wx, px2wz(apy) - wz) + YAW_FIX;
-              rig.rotation.y += wrap(yaw - rig.rotation.y) * kH; // steer along track tangent
-              glow.position.set(pos.x, 0.02, pos.z);
               renderer.render(scene, camera);
             };
             tick();
