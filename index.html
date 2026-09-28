@@ -1769,8 +1769,8 @@
             renderer.setSize(innerWidth, innerHeight);
             const scene = new THREE.Scene();
             const camera = new THREE.PerspectiveCamera(35, innerWidth / innerHeight, 0.1, 100);
-            camera.position.set(0, 3.4, 9.5);
-            camera.lookAt(0, 0, -0.5);
+            camera.position.set(0, 12, 0.01);
+            camera.lookAt(0, 0, 0); // top-down: car seen flat from above, moves in 2D
             scene.add(new THREE.HemisphereLight(0xffffff, 0x220000, 1.1));
             const key = new THREE.DirectionalLight(0xffffff, 1.6); key.position.set(4, 6, 6); scene.add(key);
             const rim = new THREE.DirectionalLight(0xE10600, 1.4); rim.position.set(-5, 3, -4); scene.add(rim);
@@ -1797,9 +1797,9 @@
 
             const card = document.getElementById('photoCard');
             const hero = document.getElementById('hero');
-            const halfH = Math.tan(THREE.MathUtils.degToRad(17.5)) * 10;
+            const halfH = Math.tan(THREE.MathUtils.degToRad(17.5)) * 12;
             const px2wx = (x) => (x / innerWidth - 0.5) * 2 * halfH * camera.aspect;
-            const px2wz = (y) => ((y / innerHeight) - 0.5) * 7 - 0.5;
+            const px2wz = (y) => ((y / innerHeight) - 0.5) * 6.5;
             const target = new THREE.Vector3(3, 0, 0);
             const clock = new THREE.Clock();
             const wrap = (a) => ((a + Math.PI * 3) % (Math.PI * 2)) - Math.PI;
@@ -1827,12 +1827,10 @@
               const nx = rig.position.x + (target.x - rig.position.x) * 0.06;
               const nz = rig.position.z + (target.z - rig.position.z) * 0.06;
               const vx = nx - rig.position.x, vz = nz - rig.position.z;
-              const speed = Math.min(1, Math.hypot(vx, vz) * 30 + 0.25);
-              rig.position.set(nx, Math.abs(Math.sin(t * 18)) * 0.035 * speed, nz);
+              rig.position.set(nx, 0, nz); // flat 2D: yaw-only steering, no tilt/bob
               if (Math.hypot(vx, vz) > 1e-4) {
                 const diff = wrap(Math.atan2(vx, vz) + YAW_FIX - rig.rotation.y);
                 rig.rotation.y += diff * 0.12;
-                rig.rotation.z = THREE.MathUtils.clamp(-diff * 3, -0.3, 0.3); // bank into turns
               }
               glow.position.set(nx, 0.02, nz);
               renderer.render(scene, camera);
