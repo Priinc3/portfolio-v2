@@ -202,6 +202,80 @@
       animation: fadeUp 0.9s 0.8s forwards;
     }
 
+    .hero-inner {
+      display: flex;
+      align-items: flex-end;
+      justify-content: space-between;
+      gap: 3rem;
+      position: relative;
+      z-index: 1;
+      width: 100%;
+    }
+
+    .hero-photo-wrap {
+      perspective: 1000px;
+      flex-shrink: 0;
+      opacity: 0;
+      animation: fadeUp 0.9s 0.7s forwards;
+    }
+
+    .hero-photo-card {
+      position: relative;
+      width: min(320px, 30vw);
+      aspect-ratio: 3/4;
+      border-radius: 20px;
+      overflow: hidden;
+      border: 1px solid var(--border-red);
+      background: var(--surface2);
+      transform: rotateY(-10deg) rotateX(4deg);
+      transform-style: preserve-3d;
+      transition: transform 0.5s ease, box-shadow 0.5s ease;
+      box-shadow: -20px 20px 60px rgba(0, 0, 0, 0.5), 0 0 40px rgba(225, 6, 0, 0.12);
+      will-change: transform;
+    }
+
+    .hero-photo-wrap:hover .hero-photo-card {
+      box-shadow: -10px 10px 60px rgba(0, 0, 0, 0.5), 0 0 60px rgba(225, 6, 0, 0.35);
+    }
+
+    .hero-photo-card img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: 50% 22%;
+      display: block;
+      transform: translateZ(30px);
+    }
+
+    .hero-photo-card::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to top, rgba(8, 8, 8, 0.45) 0%, transparent 35%);
+      pointer-events: none;
+    }
+
+    .hero-photo-badge {
+      position: absolute;
+      bottom: 1rem;
+      left: 1rem;
+      right: 1rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-family: var(--font-mono);
+      font-size: 0.65rem;
+      letter-spacing: 0.08em;
+      color: #fff;
+      background: rgba(8, 8, 8, 0.6);
+      backdrop-filter: blur(10px);
+      border: 0.5px solid var(--border-red);
+      padding: 0.5rem 0.8rem;
+      border-radius: 10px;
+      transform: translateZ(50px);
+      z-index: 2;
+    }
+
     .btn-primary {
       display: inline-flex;
       align-items: center;
@@ -1098,6 +1172,20 @@
         justify-content: center;
       }
 
+      .hero-inner {
+        flex-direction: column;
+        align-items: center;
+        gap: 2.5rem;
+      }
+
+      .hero-photo-card {
+        width: min(260px, 70vw);
+      }
+
+      .hero-photo-wrap:hover .hero-photo-card {
+        transform: rotateY(-10deg) rotateX(4deg);
+      }
+
       section {
         padding: 4rem 1.5rem;
       }
@@ -1195,15 +1283,25 @@
     <div class="hero-bg-grid"></div>
     <div class="hero-noise"></div>
 
-    <div class="hero-tag">AI Automation Engineer · B.Tech CSE (AI/ML)</div>
-    <h1 class="hero-name">Prince<br><em>Gondaliya</em></h1>
-    <p class="hero-sub">Building intelligent systems that eliminate busywork,<br>one workflow at a time.</p>
-    <div class="hero-bottom">
-      <a href="#projects" class="btn-primary">View Work ↓</a>
-      <a href="#contact" class="btn-ghost">Get In Touch →</a>
-      <div class="hero-status">
-        <div class="status-dot"></div>
-        Open to opportunities
+    <div class="hero-inner">
+      <div class="hero-text">
+        <div class="hero-tag">AI Automation Engineer · B.Tech CSE (AI/ML)</div>
+        <h1 class="hero-name">Prince<br><em>Gondaliya</em></h1>
+        <p class="hero-sub">Building intelligent systems that eliminate busywork,<br>one workflow at a time.</p>
+        <div class="hero-bottom">
+          <a href="#projects" class="btn-primary">View Work ↓</a>
+          <a href="#contact" class="btn-ghost">Get In Touch →</a>
+          <div class="hero-status">
+            <div class="status-dot"></div>
+            Open to opportunities
+          </div>
+        </div>
+      </div>
+      <div class="hero-photo-wrap" id="photoWrap">
+        <div class="hero-photo-card" id="photoCard">
+          <img src="Prince.PNG" alt="Prince Gondaliya" />
+          <div class="hero-photo-badge"><span class="status-dot"></span> Prince Gondaliya · Ahmedabad</div>
+        </div>
       </div>
     </div>
 
@@ -1622,6 +1720,21 @@
       });
     }, { threshold: 0.4 });
     sections.forEach(s => navObs.observe(s));
+
+    // Hero photo 3D tilt — ponytail: mousemove only, resets on leave
+    const photoWrap = document.getElementById('photoWrap');
+    const photoCard = document.getElementById('photoCard');
+    if (photoWrap && photoCard && window.matchMedia('(hover: hover)').matches) {
+      photoWrap.addEventListener('mousemove', e => {
+        const r = photoWrap.getBoundingClientRect();
+        const x = (e.clientX - r.left) / r.width - 0.5;
+        const y = (e.clientY - r.top) / r.height - 0.5;
+        photoCard.style.transform = `rotateY(${x * 20}deg) rotateX(${-y * 20}deg) scale(1.03)`;
+      });
+      photoWrap.addEventListener('mouseleave', () => {
+        photoCard.style.transform = 'rotateY(-10deg) rotateX(4deg)';
+      });
+    }
   </script>
 </body>
 
