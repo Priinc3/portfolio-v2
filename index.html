@@ -1775,7 +1775,7 @@
             const key = new THREE.DirectionalLight(0xffffff, 1.6); key.position.set(4, 6, 6); scene.add(key);
             const rim = new THREE.DirectionalLight(0xE10600, 1.4); rim.position.set(-5, 3, -4); scene.add(rim);
 
-            const glb = await new GLTFLoader().loadAsync('f1_ayrton_senna_1991_car.glb');
+            const glb = await new GLTFLoader().loadAsync('f1_car.glb');
             const box = new THREE.Box3().setFromObject(glb.scene);
             const size = box.getSize(new THREE.Vector3());
             const ctr = box.getCenter(new THREE.Vector3());
@@ -1790,8 +1790,8 @@
             scene.add(rig);
             const YAW_FIX = 0; // ponytail: flip to Math.PI if it ever drives backwards
             const glow = new THREE.Mesh(
-              new THREE.CircleGeometry(0.9, 24),
-              new THREE.MeshBasicMaterial({ color: 0xE10600, transparent: true, opacity: 0.25, blending: THREE.AdditiveBlending, depthWrite: false })
+              new THREE.CircleGeometry(0.7, 24),
+              new THREE.MeshBasicMaterial({ color: 0xE10600, transparent: true, opacity: 0.18, blending: THREE.AdditiveBlending, depthWrite: false })
             );
             glow.rotation.x = -Math.PI / 2; glow.position.y = 0.02; scene.add(glow);
 
